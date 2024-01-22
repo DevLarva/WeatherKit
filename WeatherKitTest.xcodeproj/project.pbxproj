@@ -56,7 +56,6 @@
 		AC2709E92B5DF482000D8CFC = {
 			isa = PBXGroup;
 			children = (
-				AC3189182B5EC6200071309A /* SECRET.plist */,
 				AC2709F42B5DF482000D8CFC /* WeatherKitTest */,
 				AC2709F32B5DF482000D8CFC /* Products */,
 			);
@@ -73,6 +72,7 @@
 		AC2709F42B5DF482000D8CFC /* WeatherKitTest */ = {
 			isa = PBXGroup;
 			children = (
+				AC3189182B5EC6200071309A /* SECRET.plist */,
 				AC270A032B5DFE37000D8CFC /* WeatherKitTest.entitlements */,
 				AC2709F52B5DF482000D8CFC /* WeatherKitTestApp.swift */,
 				AC2709F72B5DF482000D8CFC /* ContentView.swift */,
