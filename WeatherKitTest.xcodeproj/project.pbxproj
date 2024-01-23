@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC1428BD2B5F448F0049E432 /* SecureAPIKEYS.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC1428BC2B5F448F0049E432 /* SecureAPIKEYS.plist */; };
 		AC2709F62B5DF482000D8CFC /* WeatherKitTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2709F52B5DF482000D8CFC /* WeatherKitTestApp.swift */; };
 		AC2709F82B5DF482000D8CFC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2709F72B5DF482000D8CFC /* ContentView.swift */; };
 		AC2709FA2B5DF483000D8CFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC2709F92B5DF483000D8CFC /* Assets.xcassets */; };
@@ -20,10 +21,10 @@
 		AC3189142B5E3FB30071309A /* Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = AC31890F2B5E3FB30071309A /* Loading.json */; };
 		AC3189152B5E3FB30071309A /* Snow.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3189102B5E3FB30071309A /* Snow.json */; };
 		AC3189162B5E3FB30071309A /* Clouds.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3189112B5E3FB30071309A /* Clouds.json */; };
-		AC3189192B5EC6200071309A /* SECRET.plist in Resources */ = {isa = PBXBuildFile; fileRef = AC3189182B5EC6200071309A /* SECRET.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC1428BC2B5F448F0049E432 /* SecureAPIKEYS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecureAPIKEYS.plist; sourceTree = "<group>"; };
 		AC2709F22B5DF482000D8CFC /* WeatherKitTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherKitTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2709F52B5DF482000D8CFC /* WeatherKitTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitTestApp.swift; sourceTree = "<group>"; };
 		AC2709F72B5DF482000D8CFC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -37,7 +38,6 @@
 		AC31890F2B5E3FB30071309A /* Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Loading.json; path = ../../../../Downloads/Loading.json; sourceTree = "<group>"; };
 		AC3189102B5E3FB30071309A /* Snow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Snow.json; path = ../../../../Downloads/Snow.json; sourceTree = "<group>"; };
 		AC3189112B5E3FB30071309A /* Clouds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Clouds.json; path = ../../../../Downloads/Clouds.json; sourceTree = "<group>"; };
-		AC3189182B5EC6200071309A /* SECRET.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SECRET.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +56,7 @@
 		AC2709E92B5DF482000D8CFC = {
 			isa = PBXGroup;
 			children = (
+				AC1428BC2B5F448F0049E432 /* SecureAPIKEYS.plist */,
 				AC2709F42B5DF482000D8CFC /* WeatherKitTest */,
 				AC2709F32B5DF482000D8CFC /* Products */,
 			);
@@ -72,7 +73,6 @@
 		AC2709F42B5DF482000D8CFC /* WeatherKitTest */ = {
 			isa = PBXGroup;
 			children = (
-				AC3189182B5EC6200071309A /* SECRET.plist */,
 				AC270A032B5DFE37000D8CFC /* WeatherKitTest.entitlements */,
 				AC2709F52B5DF482000D8CFC /* WeatherKitTestApp.swift */,
 				AC2709F72B5DF482000D8CFC /* ContentView.swift */,
@@ -174,7 +174,7 @@
 				AC2709FA2B5DF483000D8CFC /* Assets.xcassets in Resources */,
 				AC3189152B5E3FB30071309A /* Snow.json in Resources */,
 				AC3189132B5E3FB30071309A /* Sun.json in Resources */,
-				AC3189192B5EC6200071309A /* SECRET.plist in Resources */,
+				AC1428BD2B5F448F0049E432 /* SecureAPIKEYS.plist in Resources */,
 				AC3189122B5E3FB30071309A /* Rain.json in Resources */,
 				AC3189142B5E3FB30071309A /* Loading.json in Resources */,
 				AC3189162B5E3FB30071309A /* Clouds.json in Resources */,
