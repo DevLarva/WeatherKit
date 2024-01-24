@@ -65,7 +65,7 @@ extension Bundle {
     
     var apiKey: String {
         // forResource에다 plist 파일 이름을 입력해주세요.
-        guard let filePath = Bundle.main.path(forResource: "SecureAPIKeys", ofType: "plist"),
+        guard let filePath = Bundle.main.path(forResource: "SecureAPIKEYS", ofType: "plist"),
               let plistDict = NSDictionary(contentsOfFile: filePath) else {
             fatalError("Couldn't find file 'SecureAPIKeys.plist'.")
         }

@@ -27,6 +27,13 @@ struct ContentView: View {
                         }
                     }
                 }
+        Spacer().frame(height: 40)
+        VStack(alignment:.leading) {
+            Text("오늘의 추천 술")
+                .bold()
+                .font(.title2)
+            
+        }
             }
     
     private func getKoreanWeatherDescription(for weather: String) -> String {
@@ -51,15 +58,18 @@ struct ContentView: View {
         case "Clouds":
             return "Clouds"
         case "Clear":
-            return "Sun"
+            return "Snow"
         case "Rain":
             return "Rain"
         case "Snow":
-            return "Snow"
+            return "Sun"
         case "Thunderstorm":
             return "thunderstormAnimation"
         default:
             return "unknownWeatherAnimation"
         }
     }
+}
+#Preview {
+    ContentView()
 }
