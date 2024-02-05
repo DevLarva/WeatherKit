@@ -21,6 +21,8 @@
 		AC3189142B5E3FB30071309A /* Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = AC31890F2B5E3FB30071309A /* Loading.json */; };
 		AC3189152B5E3FB30071309A /* Snow.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3189102B5E3FB30071309A /* Snow.json */; };
 		AC3189162B5E3FB30071309A /* Clouds.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3189112B5E3FB30071309A /* Clouds.json */; };
+		ACDE38C62B70A36D00BE2AA5 /* AiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE38C52B70A36D00BE2AA5 /* AiViewModel.swift */; };
+		ACDE38C92B70A3B200BE2AA5 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = ACDE38C82B70A3B200BE2AA5 /* OpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,7 @@
 		AC31890F2B5E3FB30071309A /* Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Loading.json; path = ../../../../Downloads/Loading.json; sourceTree = "<group>"; };
 		AC3189102B5E3FB30071309A /* Snow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Snow.json; path = ../../../../Downloads/Snow.json; sourceTree = "<group>"; };
 		AC3189112B5E3FB30071309A /* Clouds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Clouds.json; path = ../../../../Downloads/Clouds.json; sourceTree = "<group>"; };
+		ACDE38C52B70A36D00BE2AA5 /* AiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +49,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC270A082B5E2B76000D8CFC /* Lottie in Frameworks */,
+				ACDE38C92B70A3B200BE2AA5 /* OpenAI in Frameworks */,
 				AC3188FC2B5E37DA0071309A /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,6 +81,7 @@
 				AC2709F52B5DF482000D8CFC /* WeatherKitTestApp.swift */,
 				AC2709F72B5DF482000D8CFC /* ContentView.swift */,
 				AC270A042B5E2929000D8CFC /* WeatherAPI.swift */,
+				ACDE38C52B70A36D00BE2AA5 /* AiViewModel.swift */,
 				AC3188FD2B5E39F50071309A /* Lottie.swift */,
 				AC3189112B5E3FB30071309A /* Clouds.json */,
 				AC31890F2B5E3FB30071309A /* Loading.json */,
@@ -124,6 +129,7 @@
 			packageProductDependencies = (
 				AC270A072B5E2B76000D8CFC /* Lottie */,
 				AC3188FB2B5E37DA0071309A /* Lottie */,
+				ACDE38C82B70A3B200BE2AA5 /* OpenAI */,
 			);
 			productName = WeatherKitTest;
 			productReference = AC2709F22B5DF482000D8CFC /* WeatherKitTest.app */;
@@ -155,6 +161,7 @@
 			mainGroup = AC2709E92B5DF482000D8CFC;
 			packageReferences = (
 				AC270A062B5E2B76000D8CFC /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				ACDE38C72B70A3B200BE2AA5 /* XCRemoteSwiftPackageReference "OpenAI" */,
 			);
 			productRefGroup = AC2709F32B5DF482000D8CFC /* Products */;
 			projectDirPath = "";
@@ -188,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACDE38C62B70A36D00BE2AA5 /* AiViewModel.swift in Sources */,
 				AC3188FE2B5E39F50071309A /* Lottie.swift in Sources */,
 				AC270A052B5E2929000D8CFC /* WeatherAPI.swift in Sources */,
 				AC2709F82B5DF482000D8CFC /* ContentView.swift in Sources */,
@@ -413,6 +421,14 @@
 				minimumVersion = 4.3.4;
 			};
 		};
+		ACDE38C72B70A3B200BE2AA5 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -424,6 +440,11 @@
 		AC3188FB2B5E37DA0071309A /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Lottie;
+		};
+		ACDE38C82B70A3B200BE2AA5 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACDE38C72B70A3B200BE2AA5 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

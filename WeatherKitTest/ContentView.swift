@@ -4,12 +4,13 @@
 //
 import SwiftUI
 import CoreLocation
+import OpenAI
 
 struct ContentView: View {
     @StateObject var locationManager = LocationManager()
     @State private var weather: Weather?
     @State private var cityName: String?
-
+    @State private var aiViewModel = AiViewModel()
     var body: some View {
         VStack {
             if let weather = weather {
@@ -32,7 +33,10 @@ struct ContentView: View {
             Text("오늘의 추천 술")
                 .bold()
                 .font(.title2)
-            
+            Text(aiViewModel.respond)
+                .task {
+                    await aiViewModel.request(prompt: "Please recommend one type of snack that goes well with \(String(describing: weather?.main)) using one word using Korean from the following list. ---List: 떡볶이 피자 치킨 파전 김치전 닭꼬치 곱창 삼겹살 오뎅탕 짬뽕")
+                }
         }
             }
     
