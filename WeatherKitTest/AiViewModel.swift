@@ -31,13 +31,16 @@ struct AiModel: Decodable {
             print("Decoding error")
         }
     }
-
+    
     func request(prompt: String) async {
-        let query = ChatQuery(model: .gpt3_5Turbo_16k, messages: [
-            Chat(role: .system, content: "Please be sure to give recommendation answer in one word using Korean, only from each given list."),
+        let query = ChatQuery(model: .gpt4, messages: [
+            Chat(role: .system, content: "Please be sure to give recommendation answer in one word using Korean, only from each given list.And please print them out as 술 + 안주 and Give me random answers every time you ask me questions"),
+            Chat(role: .user, content: prompt),
+            Chat(role: .assistant, content: "카스 오뎅탕"),
+            Chat(role: .user, content: prompt),
+            Chat(role: .assistant, content: "카스 오뎅탕"),
             Chat(role: .user, content: prompt)
         ])
-        
         do {
             let result = try await openAI?.chats(query: query)
             respond = result?.choices.first?.message.content ?? ""
@@ -45,4 +48,17 @@ struct AiModel: Decodable {
             print("AI error: \(error)")
         }
     }
+    private func parseAndSetResponse(_ response: String) {
+        let components = response.components(separatedBy: " ")
+        guard components.count == 4 else {
+            print("Invalid response format")
+            return
+        }
+        
+        let drink = components[1]
+        let dish = components[3]
+        
+        respond = "술: \(drink) + 안주: \(dish)"
+    }
+    
 }

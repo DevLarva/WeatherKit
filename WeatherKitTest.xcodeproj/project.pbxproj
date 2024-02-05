@@ -21,6 +21,7 @@
 		AC3189142B5E3FB30071309A /* Loading.json in Resources */ = {isa = PBXBuildFile; fileRef = AC31890F2B5E3FB30071309A /* Loading.json */; };
 		AC3189152B5E3FB30071309A /* Snow.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3189102B5E3FB30071309A /* Snow.json */; };
 		AC3189162B5E3FB30071309A /* Clouds.json in Resources */ = {isa = PBXBuildFile; fileRef = AC3189112B5E3FB30071309A /* Clouds.json */; };
+		ACC87CCD2B7144E5005E2B9F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC87CCC2B7144E5005E2B9F /* MainView.swift */; };
 		ACDE38C62B70A36D00BE2AA5 /* AiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE38C52B70A36D00BE2AA5 /* AiViewModel.swift */; };
 		ACDE38C92B70A3B200BE2AA5 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = ACDE38C82B70A3B200BE2AA5 /* OpenAI */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		AC31890F2B5E3FB30071309A /* Loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Loading.json; path = ../../../../Downloads/Loading.json; sourceTree = "<group>"; };
 		AC3189102B5E3FB30071309A /* Snow.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Snow.json; path = ../../../../Downloads/Snow.json; sourceTree = "<group>"; };
 		AC3189112B5E3FB30071309A /* Clouds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Clouds.json; path = ../../../../Downloads/Clouds.json; sourceTree = "<group>"; };
+		ACC87CCC2B7144E5005E2B9F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		ACDE38C52B70A36D00BE2AA5 /* AiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AiViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 				AC270A032B5DFE37000D8CFC /* WeatherKitTest.entitlements */,
 				AC2709F52B5DF482000D8CFC /* WeatherKitTestApp.swift */,
 				AC2709F72B5DF482000D8CFC /* ContentView.swift */,
+				ACC87CCC2B7144E5005E2B9F /* MainView.swift */,
 				AC270A042B5E2929000D8CFC /* WeatherAPI.swift */,
 				ACDE38C52B70A36D00BE2AA5 /* AiViewModel.swift */,
 				AC3188FD2B5E39F50071309A /* Lottie.swift */,
@@ -196,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACDE38C62B70A36D00BE2AA5 /* AiViewModel.swift in Sources */,
+				ACC87CCD2B7144E5005E2B9F /* MainView.swift in Sources */,
 				AC3188FE2B5E39F50071309A /* Lottie.swift in Sources */,
 				AC270A052B5E2929000D8CFC /* WeatherAPI.swift in Sources */,
 				AC2709F82B5DF482000D8CFC /* ContentView.swift in Sources */,
