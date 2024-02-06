@@ -7,6 +7,8 @@ import CoreLocation
 import OpenAI
 
 struct ContentView: View {
+    @StateObject var locationManager = LocationManager()
+    @StateObject var aiViewModel = AiViewModel()
     var body: some View {
         TabView {
             MainView()
@@ -21,11 +23,9 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "gear")
                 }
-            Text("Forth Tab")
-                .tabItem {
-                    Image(systemName: "gear")
-                }
         }
+        .environmentObject(locationManager)
+        .environmentObject(aiViewModel)
     }
 }
 #Preview {

@@ -10,12 +10,12 @@ import CoreLocation
 import OpenAI
 
 struct MainView: View {
-    @StateObject var locationManager = LocationManager()
+    @EnvironmentObject var locationManager: LocationManager
+    @EnvironmentObject var aiViewModel: AiViewModel
+    @State private var isLoading: Bool = false
     @State private var weather: Weather?
     @State private var cityName: String?
-    @State private var aiViewModel = AiViewModel()
-    @State private var age: Int = 21
-    @State private var sexual: String = "man"
+    @State private var lastAPICallTimestamp: Date?
     let koreanSnacks = [
         "떡볶이",
         "김치전",
@@ -38,7 +38,7 @@ struct MainView: View {
         "옥수수 떡볶이",
         "계란빵",
     ]
-
+    
     let beerNames = [
         "하이네켄",
         "버드와이저",
@@ -63,70 +63,124 @@ struct MainView: View {
     ]
     var body: some View {
         VStack {
-            if let weather = weather {
-                LottieView(jsonName: getAnimationName(for: weather.main))
-                    .frame(width: 200, height: 200)
-                Text(getKoreanWeatherDescription(for: weather.main))
-            } else {
-                LottieView(jsonName: "Loading")
+            VStack {
+                if let weather = weather {
+                    LottieView(jsonName: getAnimationName(for: weather.main))
+                        .frame(width: 200, height: 200)
+                    Text(getKoreanWeatherDescription(for: weather.main))
+                } else {
+                    LottieView(jsonName: "Loading")
+                }
             }
-        }
-        .onReceive(locationManager.$location) { location in
-            if let location = location {
-                WeatherAPI.shared.getWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude) { weather in
-                    self.weather = weather
+            .onReceive(locationManager.$location) { location in
+                if shouldFetchWeather() { // Check if enough time has elapsed since the last API call
+                    if let location = location {
+                        isLoading = true // Set loading state before making API call
+                        Task {
+                            do {
+                                // Fetch weather data
+                                let weatherData = try await fetchWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                                weather = weatherData
+                                // Request AI recommendation
+                                aiViewModel.respond = try await aiViewModel.request(prompt: "Please recommend snacks and drinks that go well with this weather. Please refer to the below list behind you for the sake of snacks. Please recommend one each for snacks and drinks. When printing snacks and drinks \(String(describing: weather?.main)) ---dish List: \(koreanSnacks) ---drink List:\(beerNames)")
+                                lastAPICallTimestamp = Date() // Update the timestamp after a successful API call
+                            } catch {
+                                print("Error: \(error)")
+                            }
+                            isLoading = false // Reset loading state after API call completes
+                        }
+                    }
+                }
+            }
+            Spacer().frame(height: 40)
+            VStack(alignment:.leading) {
+                if isLoading {
+                    ProgressView()
+                } else {
+                    Text("Today's recommended drink")
+                        .bold()
+                        .font(.title2)
+                    
+                    HStack {
+                        Text(aiViewModel.respond).foregroundStyle(.orange)
+                        
+                        Text("How do you feel?")
+                    }
                 }
             }
         }
-        Spacer().frame(height: 40)
-        VStack(alignment:.leading) {
-            Text("오늘의 추천 술")
-                .bold()
-                .font(.title2)
-            HStack {
-                Text(aiViewModel.respond)
-                    .task {
-                        await aiViewModel.request(prompt: "Please recommend snacks and drinks that go well with this weather. and i'm \(age)years old \(sexual). Please refer to the below list behind you for the sake of snacks. Please recommend one each for snacks and drinks. When printing snacks and drinks \(String(describing: weather?.main)) ---dish List: \(koreanSnacks) ---drink List:\(beerNames)")
-                        print("\(String(describing: weather?.main))")
-                    }
-                Text("어때요?")
+    }
+    
+    private func shouldFetchWeather() -> Bool {
+        guard let lastTimestamp = lastAPICallTimestamp else {
+            return true // Fetch weather if no previous call timestamp exists
+        }
+        
+        let currentTime = Date()
+        let timeDifference = currentTime.timeIntervalSince(lastTimestamp)
+        let minimumTimeDifference: TimeInterval = 300 // Minimum time difference in seconds (5 minutes)
+        
+        return timeDifference >= minimumTimeDifference
+    }
+    
+    private func loadWeatherData() async {
+           guard let location = locationManager.location else { return }
+           do {
+               self.weather = try await fetchWeather(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+               
+           } catch {
+               print("Error: \(error)")
+               
+           }
+       }
+
+       private func fetchWeather(latitude: Double, longitude: Double) async throws -> Weather {
+           return try await withCheckedThrowingContinuation { continuation in
+               WeatherAPI.shared.getWeather(latitude: latitude, longitude: longitude) { weather in
+                   if let weather = weather {
+                       continuation.resume(returning: weather)
+                       print("getWeather call")
+                   } else {
+                       continuation.resume(throwing: NSError(domain: "", code: -1, userInfo: nil))
+                   }
+               }
+           }
+       }
+
+        private func getKoreanWeatherDescription(for weather: String) -> String { //날씨 정보 케이스 -> 날씨 설명 텍스트에서 사용
+            switch weather {
+            case "Clouds":
+                return "오늘은 흐림.."
+            case "Clear":
+                return "오늘은 굉장히 맑아요!"
+            case "Rain":
+                return "오늘은 비가 오네요.."
+            case "Snow":
+                return "와우~눈이 와요!"
+            case "Thunderstorm":
+                return "천둥 조심하세요!"
+            default:
+                return "알 수 없음"
             }
         }
-    }
-    
-    private func getKoreanWeatherDescription(for weather: String) -> String {
-        switch weather {
-        case "Clouds":
-            return "오늘은 흐림.."
-        case "Clear":
-            return "오늘은 굉장히 맑아요!"
-        case "Rain":
-            return "오늘은 비가 오네요.."
-        case "Snow":
-            return "와우~눈이 와요!"
-        case "Thunderstorm":
-            return "천둥 조심하세요!"
-        default:
-            return "알 수 없음"
+        
+        private func getAnimationName(for weather: String) -> String {      //날씨에 따른 애니메이션 케이스
+            switch weather {
+            case "Clouds":
+                return "Clouds"
+            case "Clear":
+                return "Snow"
+            case "Rain":
+                return "Rain"
+            case "Snow":
+                return "Sun"
+            case "Thunderstorm":
+                return "thunderstormAnimation"
+            default:
+                return "unknownWeatherAnimation"
+            }
         }
-    }
     
-    private func getAnimationName(for weather: String) -> String {
-        switch weather {
-        case "Clouds":
-            return "Clouds"
-        case "Clear":
-            return "Snow"
-        case "Rain":
-            return "Rain"
-        case "Snow":
-            return "Sun"
-        case "Thunderstorm":
-            return "thunderstormAnimation"
-        default:
-            return "unknownWeatherAnimation"
-        }
-    }
 }
 #Preview {
     MainView()

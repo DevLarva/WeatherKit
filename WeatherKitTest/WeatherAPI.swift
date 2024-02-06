@@ -34,6 +34,7 @@ class WeatherAPI {
             let decoder = JSONDecoder()
             if let weatherData = try? decoder.decode(WeatherData.self, from: data) {
                 completion(weatherData.weather.first)
+                print("API Call")
             } else {
                 completion(nil)
             }

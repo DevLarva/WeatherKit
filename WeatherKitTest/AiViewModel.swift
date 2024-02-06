@@ -15,7 +15,7 @@ struct AiModel: Decodable {
 }
 
 
-@Observable class AiViewModel {
+class AiViewModel: ObservableObject {
     var openAI: OpenAI?
     var respond = ""
     
@@ -32,22 +32,25 @@ struct AiModel: Decodable {
         }
     }
     
-    func request(prompt: String) async {
-        let query = ChatQuery(model: .gpt4, messages: [
-            Chat(role: .system, content: "Please be sure to give recommendation answer in one word using Korean, only from each given list.And please print them out as 술 + 안주 and Give me random answers every time you ask me questions"),
+    func request(prompt: String) async throws -> String {
+        let query = ChatQuery(model: .gpt3_5Turbo_16k, messages: [
+            Chat(role: .system, content: "Please be sure to give recommendation answer in one word using Korean, only from each given list.And please print them out as 술 + 안주"),
+            Chat(role: .assistant, content: "카스 + 계란찜"),
             Chat(role: .user, content: prompt),
-            Chat(role: .assistant, content: "카스 오뎅탕"),
-            Chat(role: .user, content: prompt),
-            Chat(role: .assistant, content: "카스 오뎅탕"),
-            Chat(role: .user, content: prompt)
+//            Chat(role: .assistant, content: "테라 + 닭발"),
+//            Chat(role: .user, content: prompt)
         ])
+        
         do {
             let result = try await openAI?.chats(query: query)
             respond = result?.choices.first?.message.content ?? ""
+            return respond
         } catch {
             print("AI error: \(error)")
+            throw error
         }
     }
+
     private func parseAndSetResponse(_ response: String) {
         let components = response.components(separatedBy: " ")
         guard components.count == 4 else {
@@ -59,6 +62,7 @@ struct AiModel: Decodable {
         let dish = components[3]
         
         respond = "술: \(drink) + 안주: \(dish)"
+        print(respond)
     }
     
 }
