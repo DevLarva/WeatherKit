@@ -5,10 +5,8 @@
 //  Created by 백대홍 on 1/22/24.
 //
 
-import Foundation
 import SwiftUI
 import Lottie
-// SwiftUI에서 사용하기 위헤 UIKit을 import
 import UIKit
 
 // 로티 애니메이션 뷰

@@ -97,7 +97,7 @@ struct MainView: View {
                 if isLoading {
                     ProgressView()
                 } else {
-                    Text("Today's recommended drink")
+                    Text("오늘의")
                         .bold()
                         .font(.title2)
                     

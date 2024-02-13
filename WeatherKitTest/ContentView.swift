@@ -9,13 +9,15 @@ import OpenAI
 struct ContentView: View {
     @StateObject var locationManager = LocationManager()
     @StateObject var aiViewModel = AiViewModel()
+    @StateObject var aiWellMatchViewModel = AiWellMatchViewModel()
     var body: some View {
         TabView {
-            MainView()
+            
+            WellMatched()
                 .tabItem {
                     Image(systemName: "gear")
                 }
-            Text("Second Tab")
+            MainView()
                 .tabItem {
                     Image(systemName: "gear")
                 }
@@ -26,6 +28,7 @@ struct ContentView: View {
         }
         .environmentObject(locationManager)
         .environmentObject(aiViewModel)
+        .environmentObject(aiWellMatchViewModel)
     }
 }
 #Preview {
